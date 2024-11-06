@@ -84,11 +84,11 @@ jobs:
         run: python google.py
     
       - name: Show test results
-        run: python google.py > test_results.log
+        run: python google.py 
     
-      
+      - name: Deploy Application
+        run: |
+          ./deploy_script.sh  # or the appropriate command to deploy
 
-      - name: Deploy application
-        run: run deploy
 
         
