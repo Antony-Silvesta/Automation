@@ -81,19 +81,10 @@ jobs:
             pip install selenium webdriver-manager
 
                
-      - name: Run tests with Pytest
-        run: |
-          mkdir -p reports
-          pytest --html=reports/report.html --self-contained-html
-          
      
-      - name: Upload test report
-        uses: actions/upload-artifact@v3
-        with:
-          name: pytest-report
-          path: reports/report.html
   
-  
+      - name: Run Selenium test
+        run: python google.py
     
       - name: Show test results
         run: python google.py 
@@ -101,16 +92,8 @@ jobs:
 
       
 
-      - name: Set output
-        if: success() || failure()
-        id: results
-        run: echo "artifactPath=tests/reports/" >> $GITHUB_OUTPUT
-
-      - uses: actions/upload-artifact@v3
-        if: success() || failure()
-        with:
-          name: Test-report
-          path: ${{ steps.results.outputs.artifactPath }}
+   
+   
 
       - name: Make deploy script executable
         run: chmod +x deploy_script.sh
