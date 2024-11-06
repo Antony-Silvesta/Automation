@@ -75,7 +75,7 @@ jobs:
           cat test_results.log    # Display test results for debugging
       
       - name: Show test results log
-        run: pytest google.py > test_results.log  
+        run: cat test_results.log  
 
       - name: Archive Test Report
         uses: actions/upload-artifact@v3
