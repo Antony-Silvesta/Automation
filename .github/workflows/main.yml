@@ -29,13 +29,8 @@ jobs:
         with:
           python-version: '3.9'  # Specify the Python version to use
 
-      - name: List files to verify requirements.txt path
-        run: ls -la
+      
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
       
       - name: Install dependencies
         run: |
