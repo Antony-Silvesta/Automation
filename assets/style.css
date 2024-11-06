@@ -125,7 +125,7 @@ span.xpassed,
   padding: 5px 7px;
   margin: 10px 0 10px calc(100% - 80px);
   cursor: pointer;
-  background-color: #e6e6e6;
+  background-color: #15ecb7;
 }
 .logwrapper .logexpander:after {
   content: "expand [+]";
