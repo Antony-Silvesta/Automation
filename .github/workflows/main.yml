@@ -31,18 +31,7 @@ jobs:
 
       - name: List files to verify requirements.txt path
         run: ls -la
-  
-      - name: Check for requirements.txt
-        run: |
-            if [ ! -f "requirements.txt" ]; then echo "requirements.txt not found!"; exit 1; fi
 
-      - name: Upgrade pip
-        run: python -m pip install --upgrade pip
-
-      - name: Install dependencies without cache
-        run: pip install --no-cache-dir -r requirements.txt
-  
-     
       - name: Check Docker version
         run: docker --version
 
@@ -76,6 +65,15 @@ jobs:
           asset_content_type: application/x-xz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Selenium
+        run: pip install selenium
+  
+      - name: Install dependencies
+        run: |
+            python -m pip install --upgrade pip
+            pip install selenium webdriver-manager
+  
 
       - name: Run Selenium test
         run: python Google.py  # Replace with actual test script
