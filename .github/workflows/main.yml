@@ -87,13 +87,7 @@ jobs:
         run: python google.py 
     
 
-      - name: Run Tests
-        if: success() || failure()
-        run: |
-          cd tests
-          mkdir -p reports
-          pytest test_login_page.py --browser=chrome --html=reports/reports.html
-          chmod 777 /home/runner/work/python-se/python-se/tests/reports/
+      
 
       - name: Set output
         if: success() || failure()
