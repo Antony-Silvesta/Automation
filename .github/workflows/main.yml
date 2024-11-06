@@ -86,6 +86,26 @@ jobs:
       - name: Show test results
         run: python google.py 
     
+
+      - name: Run Tests
+        if: success() || failure()
+        run: |
+          cd tests
+          mkdir -p reports
+          pytest test_login_page.py --browser=chrome --html=reports/reports.html
+          chmod 777 /home/runner/work/python-se/python-se/tests/reports/
+
+      - name: Set output
+        if: success() || failure()
+        id: results
+        run: echo "artifactPath=tests/reports/" >> $GITHUB_OUTPUT
+
+      - uses: actions/upload-artifact@v3
+        if: success() || failure()
+        with:
+          name: Test-report
+          path: ${{ steps.results.outputs.artifactPath }}
+
       - name: Make deploy script executable
         run: chmod +x deploy_script.sh
       
