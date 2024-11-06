@@ -84,11 +84,11 @@ jobs:
      
   
       - name: Run Selenium test
-        run: python google.py
-    
+        run: pytest google.py --maxfail=1 --disable-warnings --tb=short
+          
       - name: Show test results
-        run: python google.py 
-    
+        run: pytest google.py --maxfail=1 --disable-warnings --tb=short --html=report.html --css=highcontrast.css --css=accessible.css
+          
 
       
 
