@@ -31,13 +31,13 @@ jobs:
 
       - name: Check for requirements.txt
         run: |
-          if [ ! -f "requirements.txt" ]; then echo "requirements.txt not found!"; exit 1; fi
-
+            if [ ! -f "config/requirements.txt" ]; then echo "requirements.txt not found!"; exit 1; fi
+  
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install --no-cache-dir -r requirements.txt  # Install dependencies from requirements.txt
-
+            python -m pip install --upgrade pip
+            pip install --no-cache-dir -r config/requirements.txt  # Adjusted path for requirements.txt inside a folder
+  
      
       - name: Check Docker version
         run: docker --version
