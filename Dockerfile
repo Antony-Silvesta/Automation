@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 
 # Step 6: Set the default command to run the application
-CMD ["python", "Google.py"]
+CMD ["python", "google.py"]

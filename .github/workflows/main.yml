@@ -81,10 +81,10 @@ jobs:
             pip install selenium webdriver-manager
   
       - name: Run Selenium test
-        run: python Google.py
+        run: python google.py
     
       - name: Show test results
-        run: python Google.py > test_results.log
+        run: python google.py > test_results.log
     
       
 
