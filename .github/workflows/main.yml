@@ -70,8 +70,7 @@ jobs:
 
       - name: Run Selenium tests
         run: |
-          # Wait for Selenium service to be ready
-          sleep 10  # Adjust if necessary
+        
           pytest google.py > test_results.log || exit 0
           cat test_results.log    # Display test results for debugging
       
