@@ -89,11 +89,10 @@ jobs:
       - name: Make deploy script executable
         run: chmod +x deploy_script.sh  # Ensure the deployment script is executable
   
-      - name: Run deployment script
-        run: ./deploy_script.sh  # Run the deployment script (ensure it's in the correct path)
-  
-      - name: Notify deployment success
-        run: echo "Deployment completed successfully!"  # You can replace this with actual notifications (Slack, email, etc.)
-
+      - name: Make deploy script executable
+        run: chmod +x deploy_script.sh
+      
+      - name: Run deploy script
+        run: ./deploy_script.sh
 
         
