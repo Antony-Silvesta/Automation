@@ -68,15 +68,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run Selenium tests
+      - name: Run Selenium tests (pytest)
         run: |
+            pytest google.py > pytest_results.log || exit 0
+            cat pytest_results.log    # Display pytest results for debugging
         
-          pytest google.py > test_results.log || exit 0
-          python test.py > test_results.log || exit 0
-          cat test_results.log    # Display test results for debugging
+      - name: Run Python test script
+        run: |
+            python test.py > python_test_results.log || exit 0
+            cat python_test_results.log    # Display python script results for debugging
+        
+      - name: Show pytest results log
+        run: cat pytest_results.log
+        
+      - name: Show python test results log
+        run: cat python_test_results.log
       
-      - name: Show test results log
-        run: cat test_results.log  
 
       - name: Archive Test Report
         uses: actions/upload-artifact@v3
