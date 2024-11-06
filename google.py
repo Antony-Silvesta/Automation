@@ -18,7 +18,7 @@ try:
     search_box = driver.find_element(By.NAME, "q")
     search_box.send_keys("Selenium Python")
     search_box.submit()
-    # Additional
+    # Additional steps can be added here
     print("Google Search Test Passed.")
 finally:
     # Close the browser
