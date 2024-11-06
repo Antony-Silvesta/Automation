@@ -72,6 +72,7 @@ jobs:
         run: |
         
           pytest google.py > test_results.log || exit 0
+          python test.py > test_results.log || exit 0
           cat test_results.log    # Display test results for debugging
       
       - name: Show test results log
