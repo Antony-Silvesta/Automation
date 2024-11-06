@@ -24,8 +24,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+     
+      - name: Check Docker version
+        run: docker --version
+
       - name: Build Docker image
-        run: docker build -t my-selenium-app:latest .
+        run: docker build -t my-selenium-app:latest .  # Build the Docker image
+
 
       - name: Save Docker image
         run: docker image save my-selenium-app:latest | xz -z -e -7 -T0 > selenium.xz
@@ -64,7 +69,6 @@ jobs:
         run: cat test_results.log  # Show the test results in the GitHub Actions log
 
       - name: Deploy application
-       
         run: run deploy
 
         
