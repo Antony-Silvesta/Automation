@@ -87,9 +87,6 @@ jobs:
         run: python google.py 
     
       - name: Make deploy script executable
-        run: chmod +x deploy_script.sh  # Ensure the deployment script is executable
-  
-      - name: Make deploy script executable
         run: chmod +x deploy_script.sh
       
       - name: Run deploy script
