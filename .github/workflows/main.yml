@@ -67,7 +67,7 @@ jobs:
           asset_content_type: application/x-xz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          
       - name: Run Selenium tests (pytest)
         run: |
             pytest google.py > pytest_results.log || exit 0
@@ -83,28 +83,34 @@ jobs:
         
       - name: Show python test results log
         run: cat python_test_results.log
-      
+        
       - name: Archive Pytest Report
         uses: actions/upload-artifact@v3
         with:
-          name: pytest-results
-          path: pytest_results.log
-      
+            name: pytest-results
+            path: pytest_results.log
+        
       - name: Archive Python Test Results
         uses: actions/upload-artifact@v3
         with:
-          name: python-test-results
-          path: python_test_results.log
-
+            name: python-test-results
+            path: python_test_results.log
+        
+      - name: Archive HTML Test Report
+        uses: actions/upload-artifact@v3
+        with:
+            name: selenium-test-report
+            path: report.html
+        
       - name: Check if tests passed
         run: |
-          if grep -q "FAILED" pytest_results.log || grep -q "FAILED" python_test_results.log; then
-           echo "Some tests failed."
-           exit 1  # Ensure the workflow fails if any test fails
-          else
-           echo "All tests passed."
-          fi
-      
+            if grep -q "FAILED" pytest_results.log || grep -q "FAILED" python_test_results.log; then
+              echo "Some tests failed."
+              exit 1  # Ensure the workflow fails if any test fails
+            else
+              echo "All tests passed."
+            fi
+        
      
       - name: Make deploy script executable
         run: chmod +x deploy_script.sh
