@@ -85,9 +85,16 @@ jobs:
   
       - name: Run Selenium test
         run: pytest google.py --maxfail=1 --disable-warnings --tb=short
+
+
           
       - name: Show test results
-        run: cat test_results.log
+        run: |
+          if [ -f test_results.log ]; then
+            cat test_results.log
+          else
+            echo "test_results.log not found!"
+          fi
 
       - name: Archive Test Report
         uses: actions/upload-artifact@v3
