@@ -71,7 +71,7 @@ jobs:
       - name: Run Selenium tests and display results
         run: |
             
-            python test.py > python_test_results.log || exit 0  # Run test.py tests
+            python test.py > python_test_results.log || exit 0  # Run google.py tests
             cat python_test_results.log    # Display test.py results for debugging
   
         
@@ -81,7 +81,7 @@ jobs:
             name: python-results
             path: python_results.log
         
-      - name: Archive Pytest Test Results
+      - name: Archive Python Test Results
         uses: actions/upload-artifact@v3
         with:
             name: python-test-results
@@ -95,7 +95,7 @@ jobs:
         
       - name: Check if tests passed
         run: |
-            if grep -q "FAILED" pytest_results.log || grep -q "FAILED" pytest_test_results.log; then
+            if grep -q "FAILED" python_results.log || grep -q "FAILED" python_test_results.log; then
               echo "Some tests failed."
               exit 1  # Ensure the workflow fails if any test fails
             else
