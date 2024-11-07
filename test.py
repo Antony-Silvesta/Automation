@@ -5,8 +5,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import time
 
-# Set up Chrome options (without headless mode)
+# Set up Chrome options
 chrome_options = Options()
+chrome_options.add_argument("--headless")  # Run in headless mode
 chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
 chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
 chrome_options.add_argument("--disable-gpu")  # Applicable to Windows environments
