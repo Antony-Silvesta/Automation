@@ -71,21 +71,21 @@ jobs:
       - name: Run Selenium tests and display results
         run: |
             
-            pytest test.py > pytest_test_results.log || exit 0  # Run test.py tests
-            cat pytest_test_results.log    # Display test.py results for debugging
+            python test.py > python_test_results.log || exit 0  # Run test.py tests
+            cat python_test_results.log    # Display test.py results for debugging
   
         
-      - name: Archive Pytest Report
+      - name: Archive Python Report
         uses: actions/upload-artifact@v3
         with:
-            name: pytest-results
-            path: pytest_results.log
+            name: python-results
+            path: python_results.log
         
       - name: Archive Pytest Test Results
         uses: actions/upload-artifact@v3
         with:
-            name: pytest-test-results
-            path: pytest_test_results.log
+            name: python-test-results
+            path: python_test_results.log
         
       - name: Archive HTML Test Report
         uses: actions/upload-artifact@v3
