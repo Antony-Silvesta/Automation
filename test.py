@@ -55,7 +55,7 @@ def test_take_screenshot(driver):
     except Exception as e:
         pytest.fail(f"Screenshot capture failed: {str(e)}")
 
-# Group tests into a class (optional for organization)
+# Group tests into a class 
 @pytest.mark.usefixtures("driver")
 class TestGoogleAutomation:
 
