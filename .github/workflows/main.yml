@@ -67,51 +67,21 @@ jobs:
           asset_content_type: application/x-xz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Run Selenium tests (pytest)
+      - name: Run pytest with HTML report
         run: |
-            pytest google.py > pytest_results.log || exit 0
-            cat pytest_results.log    # Display pytest results for debugging
-        
-      - name: Run Python test script
-        run: |
-            python test.py > python_test_results.log || exit 0
-            cat python_test_results.log    # Display python script results for debugging
-        
-      - name: Show pytest results log
-        run: cat pytest_results.log
-        
-      - name: Show python test results log
-        run: cat python_test_results.log
-        
-      - name: Archive Pytest Report
+            pytest --html=report.html --self-contained-html  # Run pytest and generate report
+    
+      - name: Upload HTML report as artifact
         uses: actions/upload-artifact@v3
         with:
-            name: pytest-results
-            path: pytest_results.log
-        
-      - name: Archive Python Test Results
+            name: pytest-report  # The name of the artifact
+            path: report.html  # Path to the HTML report file
+    
+      - name: Display test results in GitHub UI
         uses: actions/upload-artifact@v3
         with:
-            name: python-test-results
-            path: python_test_results.log
-        
-      - name: Archive HTML Test Report
-        uses: actions/upload-artifact@v3
-        with:
-            name: selenium-test-report
-            path: report.html
-        
-      - name: Check if tests passed
-        run: |
-            if grep -q "FAILED" pytest_results.log || grep -q "FAILED" python_test_results.log; then
-              echo "Some tests failed."
-              exit 1  # Ensure the workflow fails if any test fails
-            else
-              echo "All tests passed."
-            fi
-        
-     
+            name: pytest-report
+            path: report.html  # Upload the generated HTML report as an artifact
       - name: Make deploy script executable
         run: chmod +x deploy_script.sh
       
