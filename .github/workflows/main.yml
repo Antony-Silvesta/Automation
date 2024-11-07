@@ -71,7 +71,7 @@ jobs:
       - name: Run Selenium tests and display results
         run: |
             
-            python test.py > python_test_results.log || exit 0  # Run google.py tests
+            python google.py > python_test_results.log || exit 0  # Run google.py tests
             cat python_test_results.log    # Display test.py results for debugging
   
         
