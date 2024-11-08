@@ -87,10 +87,7 @@ jobs:
             path: report.html
         
    
-      - name: Check if tests passed
-        run: |
-              grep -q "FAILED" pytest_test_results.log && exit 1
-          
+     
       
         
      

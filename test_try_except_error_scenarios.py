@@ -1,14 +1,22 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import  WebDriverException
+from selenium.common.exceptions import WebDriverException
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-
+from selenium.webdriver.chrome.options import Options
 
 @pytest.fixture
 def driver():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    # Set up Chrome options to run headlessly
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Run in headless mode
+    chrome_options.add_argument("--no-sandbox")  # Required for certain environments (e.g., CI/CD)
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome resource issues
+    chrome_options.add_argument("--window-size=1920x1080")  # Ensure consistent window size
+
+    # Initialize the WebDriver with the headless options
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     yield driver
     driver.quit()
 
@@ -24,7 +32,6 @@ def test_pass(driver):
 def test_fail(driver):
     driver.get("https://www.wikipedia.org/")
     driver.find_element(By.ID, "nonexistent-element")  # This element doesn't exist
-
 
 
 # Test 3: This will be skipped - using pytest.mark.skip
@@ -54,8 +61,8 @@ def test_unexpected_pass(driver):
 
 
 # Test 6: This will cause an error - simulate WebDriverException
-@pytest.mark.xfail(reason=" testing for error handling")
-def test_error():
+@pytest.mark.xfail(reason="testing for error handling")
+def test_error(driver):
     try:
         driver.get("https://www.wikipedia.org/")
         driver.find_element(By.ID, "nonexistent-element")  # This will raise NoSuchElementException
@@ -71,6 +78,3 @@ def test_rerun(driver):
     driver.get("https://www.wikipedia.org/")
     search_input = driver.find_element(By.ID, "searchInput")
     assert search_input is None  # This will fail initially, triggering reruns
-
-
-
