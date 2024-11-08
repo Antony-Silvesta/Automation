@@ -68,10 +68,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-      - name: Run Selenium tests
+      - name: Run Selenium tests and generate HTML report
         id: run_tests
         run: |
-            pytest test_login.py > pytest_test_results.log || exit 0
+            pytest test_login.py --html=report.html > pytest_test_results.log || exit 0
             cat pytest_test_results.log
         
       - name: Archive Pytest Results
@@ -84,7 +84,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
             name: selenium-test-report
-            path: pytest test_login.py > pytest_test_results.log 
+            path: report.html
         
       - name: Check if tests passed
         run: |
@@ -95,8 +95,6 @@ jobs:
               echo "All tests passed."
             fi
         
-          
-    
           
       
         
