@@ -84,7 +84,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
             name: selenium-test-report
-            path: report.html
+            path: pytest test_login.py > pytest_test_results.log 
         
       - name: Check if tests passed
         run: |
