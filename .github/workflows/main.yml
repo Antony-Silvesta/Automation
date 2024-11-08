@@ -72,7 +72,7 @@ jobs:
         
       - name: Run Selenium tests and display results
         run: |
-              pytest test_example.py test_login.py test_error_scenarios.py test_try_except_error_scenarios.py > pytest_test_results.log || exit 0
+              pytest test_example.py, pytest test_login.py, pytest test_error_scenarios.py, pytest test_try_except_error_scenarios.py > pytest_test_results.log || exit 0
               cat pytest_test_results.log
           
       - name: Archive Pytest Results
@@ -81,11 +81,7 @@ jobs:
               name: pytest-results
               path: pytest_test_results.log
           
-      - name: Archive Python Test Results
-        uses: actions/upload-artifact@v3
-        with:
-              name: pytest-test-results
-              path: pytest_test_results.log
+    
           
       - name: Archive HTML Test Report
         uses: actions/upload-artifact@v3
