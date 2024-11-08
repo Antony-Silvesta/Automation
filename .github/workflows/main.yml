@@ -68,30 +68,31 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
+   
+        
       - name: Run Selenium tests and display results
         run: |
-            
-            python google.py > python_test_results.log || exit 0  # Run google.py tests
-            cat python_test_results.log    # Display test.py results for debugging
-  
-        
-      - name: Archive Python Report
+              pytest test_example.py test_login.py test_error_scenarios.py test_try_except_error_scenarios.py > pytest_test_results.log || exit 0
+              cat pytest_test_results.log
+          
+      - name: Archive Pytest Results
         uses: actions/upload-artifact@v3
         with:
-            name: python-results
-            path: python_results.log
-        
+              name: pytest-results
+              path: pytest_test_results.log
+          
       - name: Archive Python Test Results
         uses: actions/upload-artifact@v3
         with:
-            name: python-test-results
-            path: python_test_results.log
-        
+              name: pytest-test-results
+              path: pytest_test_results.log
+          
       - name: Archive HTML Test Report
         uses: actions/upload-artifact@v3
         with:
-            name: selenium-test-report
-            path: report.html
+              name: selenium-test-report
+              path: report.html
+          
         
       - name: Check if tests passed
         run: |
