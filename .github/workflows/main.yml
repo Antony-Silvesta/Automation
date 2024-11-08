@@ -86,15 +86,10 @@ jobs:
             name: selenium-test-report
             path: report.html
         
+   
       - name: Check if tests passed
         run: |
-            if grep -q "FAILED" pytest_test_results.log; then
-              echo "Some tests failed."
-              exit 1  # Ensure the workflow fails if any test fails
-            else
-              echo "All tests passed."
-            fi
-        
+              grep -q "FAILED" pytest_test_results.log && exit 1
           
       
         
