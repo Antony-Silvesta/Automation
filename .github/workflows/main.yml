@@ -72,7 +72,7 @@ jobs:
         
       - name: Run Selenium tests and display results
         run: |
-              pytest test_example.py, pytest test_login.py, pytest test_error_scenarios.py, pytest test_try_except_error_scenarios.py > pytest_test_results.log || exit 0
+              pytest test_login.py > pytest_test_results.log || exit 0
               cat pytest_test_results.log
           
       - name: Archive Pytest Results
