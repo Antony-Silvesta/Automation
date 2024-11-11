@@ -6,4 +6,4 @@ from selenium.webdriver.common.by import By
 def test_rerun(driver):
     driver.get("https://www.wikipedia.org/")
     search_input = driver.find_element(By.ID, "searchInput")
-    assert search_input is None  # This will fail initially, triggering reruns
+    assert search_input is None  # This will fail initially, triggering rerun
