@@ -67,6 +67,9 @@ jobs:
           asset_content_type: application/x-xz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set Timezone to India Standard Time (IST)
+        run: sudo timedatectl set-timezone Asia/Kolkata  # Set the timezone to IST   
           
       - name: Run Selenium tests and generate HTML report
         id: run_tests
