@@ -71,7 +71,7 @@ jobs:
       - name: Run Selenium tests and generate HTML report
         id: run_tests
         run: |
-            pytest --html=Selenium Test Cases report.html --self-contained-html > pytest_test_results.log || exit 0
+            pytest --html=Selenium_report.html --self-contained-html > pytest_test_results.log || exit 0
             cat pytest_test_results.log
         
       - name: Archive Pytest Results
@@ -84,7 +84,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
             name: selenium-test-report
-            path: Selenium Test Cases report.html
+            path: Selenium_report.html
         
    
      
